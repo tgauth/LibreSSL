@@ -721,6 +721,7 @@ endif()
 
 if(WIN32)
 	set(COMPAT_SRC ${COMPAT_SRC} compat/posix_win.c)
+	set(EXTRA_EXPORT ${EXTRA_EXPORT} gettimeofday)
 endif()
 
 if(NOT HAVE_ASPRINTF)
@@ -729,6 +730,7 @@ endif()
 
 if(NOT HAVE_FREEZERO)
 	set(COMPAT_SRC ${COMPAT_SRC} compat/freezero.c)
+	set(EXTRA_EXPORT ${EXTRA_EXPORT} freezero)
 endif()
 
 if(NOT HAVE_GETOPT)
@@ -805,6 +807,9 @@ endif()
 if(NOT HAVE_ARC4RANDOM_BUF)
 	set(COMPAT_SRC ${COMPAT_SRC} compat/arc4random.c)
 	set(COMPAT_SRC ${COMPAT_SRC} compat/arc4random_uniform.c)
+	set(EXTRA_EXPORT ${EXTRA_EXPORT} arc4random)
+	set(EXTRA_EXPORT ${EXTRA_EXPORT} arc4random_buf)
+	set(EXTRA_EXPORT ${EXTRA_EXPORT} arc4random_uniform)
 
 	if(NOT HAVE_GETENTROPY)
 		if(WIN32)
