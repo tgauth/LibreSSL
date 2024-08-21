@@ -861,6 +861,14 @@ foreach(SYM IN LISTS CRYPTO_UNEXPORT)
 endforeach()
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/crypto_p.sym ${SYMS})
 
+if(EXTRA_EXPORT)
+	list(SORT EXTRA_EXPORT)
+	foreach(SYM IN LISTS EXTRA_EXPORT)
+		file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/crypto_p.sym "${SYM}\n")
+	endforeach()
+endif()
+set(LIBTLS_EXTRA_EXPORT ${EXTRA_EXPORT} PARENT_SCOPE)
+
 add_library(compat_obj OBJECT ${COMPAT_SRC})
 target_include_directories(compat_obj
 	PRIVATE
